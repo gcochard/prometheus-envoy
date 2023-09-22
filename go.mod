@@ -1,12 +1,21 @@
-module github.com/nik-johnson-net/prometheus-envoy
+module github.com/gcochard/prometheus-envoy
 
-go 1.13
+go 1.21.1
 
 require (
-	github.com/golang/protobuf v1.4.2 // indirect
-	github.com/nik-johnson-net/go-envoy v1.0.0
-	github.com/nik-johnson-net/prometheus-proxy v1.0.0
-	github.com/prometheus/client_golang v1.6.0
-	github.com/prometheus/common v0.10.0 // indirect
-	golang.org/x/sys v0.0.0-20200519105757-fe76b779f299 // indirect
+	github.com/gcochard/go-envoy v1.1.1
+	github.com/gcochard/prometheus-proxy v1.1.0
+	github.com/prometheus/client_golang v1.16.0
+)
+
+require (
+	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/cespare/xxhash/v2 v2.2.0 // indirect
+	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
+	github.com/prometheus/client_model v0.3.0 // indirect
+	github.com/prometheus/common v0.42.0 // indirect
+	github.com/prometheus/procfs v0.10.1 // indirect
+	golang.org/x/sys v0.8.0 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
 )
