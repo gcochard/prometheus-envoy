@@ -1,14 +1,15 @@
 [Unit]
 Description=Prometheus Envoy Collector
 After=network.target
+StartLimitIntervalSec=0
 
 [Service]
-ExecStart=/usr/local/bin/prometheus-envoy -port 2113
+ExecStart=/usr/local/bin/prometheus-envoy -port 2112 -listen=0.0.0.0
+EnvironmentFile=/etc/prometheus-envoy/_env
 Type=simple
 Restart=always
 RestartSec=1
 User=root
-StartLimitIntervalSec=0[Service]
 
 [Install]
 WantedBy=multi-user.target
