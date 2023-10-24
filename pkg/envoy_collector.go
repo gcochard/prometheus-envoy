@@ -62,9 +62,7 @@ func (s *EnvoyCollector) Collect(metrics chan<- prometheus.Metric) {
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
 	client := envoy.NewClientWithHTTP(s.target, "https", &http.Client{Transport: tr})
-	log.Printf("s: %s", s)
 	if s.token != "" {
-		log.Printf("Token: %s", s.token)
 		client.SetToken(s.token)
 	}
 
