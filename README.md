@@ -29,8 +29,25 @@ snmp_exporter tool.
 ```sh
 cd cmd/prometheus-envoy
 go build
-./prometheus-envoy -port 2112
+./prometheus-envoy -port 2112 -token <jwt>
 ```
+
+## Installing
+
+```sh
+make && sudo make install-svc
+mkdir -p /etc/prometheus-envoy/
+# fetch a JWT from the envoy
+echo "<jwt>" | sudo tee /etc/prometheus/token
+sudo systemctl enable prometheus-envoy.service
+sudo systemctl start prometheus-envoy.service
+```
+
+## Listening on all interfaces
+
+By default, this will only listen on the loopback interface. This can be problematic
+if prometheus is running on a different host. To listen on all interfaces, add `-listen=0.0.0.0`
+to the command line argument. This is done by default in the systemd service definition.
 
 ## License
 

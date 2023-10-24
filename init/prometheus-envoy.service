@@ -4,8 +4,8 @@ After=network.target
 StartLimitIntervalSec=0
 
 [Service]
-ExecStart=/usr/local/bin/prometheus-envoy -port 2112 -listen=0.0.0.0
-EnvironmentFile=/etc/prometheus-envoy/_env
+LoadCredential=token:/etc/prometheus-envoy/token
+ExecStart=/usr/local/bin/prometheus-envoy -port 2112 -listen=0.0.0.0 -token=${CREDENTIALS_DIRECTORY}/token
 Type=simple
 Restart=always
 RestartSec=1
