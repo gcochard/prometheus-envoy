@@ -39,6 +39,8 @@ var (
 	descConsumptionGridReactivePowerWatts = prometheus.NewDesc("envoy_consumption_grid_reactive_power_watts", "", nil, nil)
 	descConsumptionGridApparentPowerWatts = prometheus.NewDesc("envoy_consumption_grid_apparent_power_watts", "", nil, nil)
 	descConsumptionGridPowerFactor = prometheus.NewDesc("envoy_consumption_grid_power_factor", "", nil, nil)
+
+	client *envoy.Client
 )
 
 type EnvoyCollector struct {
@@ -61,9 +63,12 @@ func (s *EnvoyCollector) Collect(metrics chan<- prometheus.Metric) {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
-	client := envoy.NewClientWithHTTP(s.target, "https", &http.Client{Transport: tr})
-	if s.token != "" {
-		client.SetToken(s.token)
+	if client == nil {
+		log.Printf("Client init")
+		client = envoy.NewClientWithHTTP(s.target, "https", &http.Client{Transport: tr})
+		if s.token != "" {
+			client.SetToken(s.token)
+		}
 	}
 
 	production, err := client.Production()

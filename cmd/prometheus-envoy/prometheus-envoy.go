@@ -10,11 +10,15 @@ import (
 	"github.com/gcochard/prometheus-envoy/pkg"
 )
 
+var ec *pkg.EnvoyCollector
 var tokenpath *string
 var token *string
 func factory(target string) prometheus.Collector {
-	log.Printf("token: %s", *token)
-	return pkg.NewEnvoyCollector(target, *token)
+	if ec == nil{
+		log.Printf("token: %s...%s", (*token)[:4], (*token)[len(*token)-4:])
+		ec = pkg.NewEnvoyCollector(target, *token)
+	}
+	return ec
 }
 
 var app = proxy.Application {
